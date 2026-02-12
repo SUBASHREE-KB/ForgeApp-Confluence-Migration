@@ -1,10 +1,10 @@
 modules:
   confluence:globalPage:
-    - key: conf2conf-migration-hello-world
+    - key: confluence-migration-admin-page
       resource: main
       resolver:
         function: resolver
-      title: conf2conf-migration
+      title: Confluence to Confluence Migration
       route: hello-world
   function:
     - key: resolver
@@ -12,9 +12,18 @@ modules:
 resources:
   - key: main
     path: static/hello-world/build
+permissions:
+  scopes:
+    - storage:app
+  external:
+    fetch:
+      backend:
+        - '*.atlassian.net'
+      client:
+        - '*.atlassian.net'
 app:
   runtime:
     name: nodejs24.x
-    memoryMB: 256
+    memoryMB: 512
     architecture: arm64
   id: ari:cloud:ecosystem::app/f7cd3c26-5034-43e1-ae73-d94a20ea976c
