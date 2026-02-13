@@ -44,7 +44,7 @@ const s = {
 // ─── CREDENTIAL FORM ─────────────────────────────────────────────────────────
 function CredForm({ type, onSaved }) {
   const isSource = type === 'source';
-  const title = isSource ? '🔵 Source Instance' : '🟢 Destination Instance';
+  const title = isSource ? 'Source Instance' : 'Destination Instance';
 
   const [domain,   setDomain]   = useState('');
   const [email,    setEmail]    = useState('');
@@ -74,7 +74,7 @@ function CredForm({ type, onSaved }) {
     const r = await invoke('testConnection', { type });
     setBusy(false);
     if (r.success) {
-      setStatus({ t: 'success', m: `✅ Connected to ${r.siteTitle}` });
+      setStatus({ t: 'success', m: `Connected to ${r.siteTitle}` });
       setConnected(true);
       if (onSaved) onSaved(type, true);
     } else {
@@ -87,7 +87,7 @@ function CredForm({ type, onSaved }) {
     <div style={s.card}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
         <div style={s.cardTitle}>{title}</div>
-        {connected && <span style={s.badge(true)}>✓ Connected</span>}
+        {connected && <span style={s.badge(true)}>Connected</span>}
       </div>
 
       <div style={{ display: 'grid', gap: '12px' }}>
@@ -115,8 +115,8 @@ function CredForm({ type, onSaved }) {
             onChange={e => setToken(e.target.value)} placeholder="••••••••••••••••••••" />
         </div>
         <div style={s.row}>
-          <button style={s.btnP} onClick={save} disabled={busy}>{busy ? '…' : '💾 Save'}</button>
-          <button style={s.btnO} onClick={test} disabled={busy}>{busy ? '…' : '🔌 Test Connection'}</button>
+          <button style={s.btnP} onClick={save} disabled={busy}>{busy ? '…' : 'Save'}</button>
+          <button style={s.btnO} onClick={test} disabled={busy}>{busy ? '…' : 'Test Connection'}</button>
         </div>
         {status && <div style={s.alert(status.t)}>{status.m}</div>}
       </div>
@@ -146,9 +146,9 @@ function SpaceSelector({ onSelect, selectedKey }) {
   return (
     <div style={s.card}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-        <div style={s.cardTitle}>📂 Source Spaces</div>
+        <div style={s.cardTitle}>Source Spaces</div>
         <button style={s.btnP} onClick={load} disabled={loading}>
-          {loading ? '…' : spaces.length ? '🔄 Refresh' : '📋 Load Spaces'}
+          {loading ? '…' : spaces.length ? 'Refresh' : 'Load Spaces'}
         </button>
       </div>
 
@@ -168,7 +168,7 @@ function SpaceSelector({ onSelect, selectedKey }) {
                     Key: <strong>{sp.key}</strong> · {sp.type}
                   </div>
                 </div>
-                {selectedKey === sp.key && <span style={s.badge(true)}>✓ Selected</span>}
+                {selectedKey === sp.key && <span style={s.badge(true)}>Selected</span>}
               </div>
             ))}
           </div>
@@ -293,7 +293,7 @@ function MigrationPanel({ space }) {
   if (!space) {
     return (
       <div style={s.card}>
-        <div style={s.cardTitle}>🚀 Migration</div>
+        <div style={s.cardTitle}>Migration</div>
         <div style={{ color: C.textMuted, fontSize: '13px' }}>← Select a space first.</div>
       </div>
     );
@@ -301,7 +301,7 @@ function MigrationPanel({ space }) {
 
   return (
     <div style={s.card}>
-      <div style={s.cardTitle}>🚀 Migration</div>
+      <div style={s.cardTitle}>Migration</div>
 
       {/* Selected space summary */}
       <div style={{ background: '#DEEBFF', border: `1px solid ${C.primary}`, borderRadius: '6px', padding: '12px 14px', marginBottom: '14px' }}>
@@ -330,7 +330,7 @@ function MigrationPanel({ space }) {
         <div style={{ marginTop: '14px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: C.textSub }}>
             <span>
-              {phase === 'preparing' ? 'Preparing…' : phase === 'done' ? '✅ Complete' : `Migrating pages…`}
+              {phase === 'preparing' ? 'Preparing…' : phase === 'done' ? 'Complete' : `Migrating pages…`}
             </span>
             <span><strong>{progress}</strong> / {total} pages ({pct}%)</span>
           </div>
@@ -343,7 +343,7 @@ function MigrationPanel({ space }) {
 
       {/* Result banners */}
       {phase === 'done' && (
-        <div style={s.alert('success')}>✅ Migration complete! {total} pages migrated to {space.key}.</div>
+        <div style={s.alert('success')}>Migration complete! {total} pages migrated to {space.key}.</div>
       )}
       {phase === 'error' && (
         <div style={s.alert('error')}>❌ Error: {errMsg}</div>
@@ -416,8 +416,8 @@ export default function App() {
 
       {/* Tabs */}
       <div style={s.tabs}>
-        <button style={s.tab(tab === 'connect')} onClick={() => setTab('connect')}>🔐 Connect Instances</button>
-        <button style={s.tab(tab === 'migrate')} onClick={() => setTab('migrate')}>📤 Migrate</button>
+        <button style={s.tab(tab === 'connect')} onClick={() => setTab('connect')}> Connect Instances</button>
+        <button style={s.tab(tab === 'migrate')} onClick={() => setTab('migrate')}> Migrate</button>
       </div>
 
       {/* Connect tab */}
